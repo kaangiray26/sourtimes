@@ -107,6 +107,6 @@ class sour:
 
 
 if __name__ == "__main__":
-    sour = sour()
+    eksi = sour()
     i = input("Query: ")
-    print(sour.autocomplete(i).titles)
+    print(eksi.autocomplete(i).titles)
