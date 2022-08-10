@@ -24,6 +24,7 @@ class autocomplete:
         self.titles = titles
         self.nicks = nicks
 
+
 class sour_item:
     """
     sour_sitem class that provides contents from a title.
@@ -36,6 +37,34 @@ class sour_item:
     def __init__(self, title, results):
         self.title = title
         self.results = results
+
+
+class sour_entry:
+    """
+    sour_entry class that provides entry information.
+
+    Attributes:
+        entry_id (int): ID of the entry
+        author_id (int): ID of the author
+        author (str): Nickname of the author
+        author_avatar (str): Avatar image of the author
+        fav_count (int): Favorite count of the entry
+        url (str): URL of the entry
+        date (str): Entry date
+        content (str): Content of the entry
+    """
+
+    def __init__(self, entry_id, author_id, author, avatar, fav_count, date, content):
+        self.entry_id = entry_id,
+        self.author_id = author_id
+        self.author = author
+        self.author_avatar = avatar
+        if not self.author_avatar.startswith('http'):
+            self.author_avatar = "https:" + self.author_avatar
+        self.fav_count = fav_count
+        self.url = f"https://eksisozluk.com/entry/{entry_id}"
+        self.date = date
+        self.content = content
 
 
 class sour_title:
@@ -131,6 +160,17 @@ class sour:
         return sour_titles
 
     def query(self, q, page=1, nice=False):
+        """
+        Return entries from a page.
+
+        Args:
+            q (str): The query text
+            page (int): The page index of the results
+            nice (boolean): Option to sort entries by their favorite counts
+
+        Returns:
+            list of sour_entry objects
+        """
         payload = {
             'q': q,
             '_': int(time.time()*1000),
@@ -146,7 +186,24 @@ class sour:
             raise Exception
 
         doc = html.fromstring(r.content.decode())
-        return sour_item(q, [" ".join([t.strip() for t in content.itertext()]).strip() for content in doc.xpath('//li/div[@class="content"]')])
+        sour_entries = []
+        results = doc.xpath('//ul[@id="entry-item-list"]/li')
+
+        for result in results:
+            sour_entries.append(
+                sour_entry(
+                    result.get('data-id'),
+                    result.get('data-author-id'),
+                    result.get('data-author'),
+                    result.xpath('.//img[@class="avatar"]/@src')[0],
+                    result.get('data-favorite-count'),
+                    result.xpath(
+                        './/a[contains(@class, "entry-date")]/text()')[0],
+                    " ".join([t.strip() for t in result.xpath(
+                        './div[@class="content"]')[0].itertext()])
+                )
+            )
+        return sour_entries
 
     def search(self, keywords, author=None, page=1, fromdate=None, todate=None, nice_only=False, sort="Topic"):
         """
@@ -172,6 +229,7 @@ class sour:
             "SearchForm.When.To": todate,
             "SearchForm.NiceOnly": nice_only,
             "SearchForm.SortOrder": sort,
+            "page": page,
             '_': int(time.time()*1000),
         }
         r = requests.get("https://eksisozluk.com/basliklar/ara",
@@ -221,4 +279,5 @@ class sour:
 
 if __name__ == "__main__":
     eksi = sour()
-    eksi.news()
+    for entry in eksi.query("behzat ç."):
+        print(entry.fav_count)

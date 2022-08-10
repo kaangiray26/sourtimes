@@ -1,6 +1,13 @@
 # sourtimes
 The Python Eksisozluk API Wrapper
 
+## Features
+* Get autocomplete results
+* Get 'gündem' titles
+* Get 'debe' titles
+* Search for titles with parameters
+* Get contents from a page
+
 ## Documentation
 Coming soon...
 
