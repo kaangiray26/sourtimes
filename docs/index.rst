@@ -1,10 +1,10 @@
-.. sourtimes documentation master file, created by
+.. Sourtimes documentation master file, created by
    sphinx-quickstart on Wed Aug 10 18:03:10 2022.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Sourtimes's documentation!
-==================================
+Sourtimes: The Python Eksisozluk API Wrapper
+============================================
 
 Check out the source code at our `GitHub Repository <https://github.com/kgbzen/sourtimes>`__.
 
