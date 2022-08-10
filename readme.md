@@ -1,4 +1,4 @@
-# sourtimes
+# sourpy
 The Python Eksisozluk API Wrapper
 
 ## Features
@@ -13,16 +13,16 @@ Coming soon...
 
 ## Installation
 ```
-git clone https://github.com/kgbzen/sourtimes.git
-cd sourtimes
+git clone https://github.com/kgbzen/sourpy.git
+cd sourpy
 python -m pip install -r requirements.txt
 ```
 
 ## Quickstart
 ```
-from sourtimes import sour
+from sourpy import Sour
 
-eksi = sour()
+eksi = Sour()
 q = eksi.autocomplete("uzun a")
 print(q.titles)
 ```
