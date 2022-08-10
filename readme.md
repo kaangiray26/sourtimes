@@ -6,7 +6,7 @@ The Python Eksisozluk API Wrapper
 * Get 'gündem' titles
 * Get 'debe' titles
 * Search for titles with parameters
-* Get contents from a page
+* Get entries from a page
 
 ## Documentation
 Coming soon...
