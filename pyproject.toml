@@ -24,4 +24,5 @@ dependencies = [
 
 [project.urls]
 "Homepage" = "https://github.com/kgbzen/sourtimes"
+"Documentation" = "https://sourtimes.readthedocs.io/en/latest/"
 "Bug Tracker" = "https://github.com/kgbzen/sourtimes/issues"
