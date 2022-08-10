@@ -3,8 +3,8 @@ The Python Eksisozluk API Wrapper
 
 ## Features
 * Get autocomplete results
-* Get 'gündem' titles
-* Get 'debe' titles
+* Get ```gündem``` titles
+* Get ```debe``` titles
 * Search for titles with parameters
 * Get entries from a page
 
