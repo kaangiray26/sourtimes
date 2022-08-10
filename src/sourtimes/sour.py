@@ -352,9 +352,6 @@ class Sour:
             sour_titles.append(sour_title(href, title, count))
         return sour_titles
 
-
-if __name__ == "__main__":
-    eksi = Sour()
-    tts = eksi.orphans(2)
-    for title in tts:
-        print(title.url)
+    def get_channel(self, hashtag):
+        
+        pass

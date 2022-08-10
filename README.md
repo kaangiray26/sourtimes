@@ -1,4 +1,7 @@
-# sourtimes
+![PyPI](https://img.shields.io/pypi/v/sourtimes?color=blue)
+[![GitHub license](https://img.shields.io/github/license/kgbzen/sourtimes)](https://github.com/kgbzen/sourtimes/blob/main/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/kgbzen/sourtimes)](https://github.com/kgbzen/sourtimes/issues)
+
 The Python Eksisozluk API Wrapper
 
 ## Features
