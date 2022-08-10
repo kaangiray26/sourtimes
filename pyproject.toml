@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sourtimes"
+version = "0.0.4"
+authors = [
+    {name = "Kaan Giray Buzluk", email = "kaangiray26@protonmail.com"},
+]
+description = "The Python Eksisozluk API Wrapper"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent"
+]
+dependencies = [
+    "requests",
+    "lxml"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/kgbzen/sourtimes"
+"Bug Tracker" = "https://github.com/kgbzen/sourtimes/issues"

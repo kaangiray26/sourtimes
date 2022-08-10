@@ -315,12 +315,46 @@ class Sour:
                     href=a.get('href')
                 )
             )
-        
+
         return channels
+
+    def orphans(self, page=1):
+        """
+        Return all orphan titles
+
+        Args:
+            page (int): Page index of the results
+
+        Returns:
+            list of sour_title objects
+        """
+
+        payload = {
+            "p": page
+        }
+
+        r = requests.get("https://eksisozluk.com/basliklar/basiboslar",
+                         headers=self.headers, params=payload)
+
+        if r.status_code != 200:
+            raise Exception
+
+        doc = html.fromstring(r.content.decode())
+        sour_titles = []
+        results = doc.xpath('//li/a')
+
+        for result in results:
+            href = result.get('href')
+            try:
+                title, count = [t.strip() for t in result.itertext()]
+            except ValueError:
+                count = None
+            sour_titles.append(sour_title(href, title, count))
+        return sour_titles
 
 
 if __name__ == "__main__":
     eksi = Sour()
-    chn = eksi.channels()
-    for channel in chn:
-        print(channel.url)
+    tts = eksi.orphans(2)
+    for title in tts:
+        print(title.url)
