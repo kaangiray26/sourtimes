@@ -18,16 +18,15 @@ Sourtimes's documentation is organized into the following sections:
 Getting Started
 ===============
 
-- :doc:`Quick Start <quick-start>`
 - :doc:`Installation <installation>`
-- :doc:`Using Sourtimes <usage>`
+- :doc:`Quick Start <quick-start>`
 
 .. _code-overview:
 
 Code Overview
 =============
 
-- :doc:`Sour Class <sour>`
+- :doc:`Sour <sour>`
 
 Indices and tables
 ==================
