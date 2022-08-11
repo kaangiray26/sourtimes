@@ -1,9 +1,10 @@
 #!/usr/bin/python
 # -*- encoding:utf-8 -*-
 
+import time
 import requests
 from lxml import html
-import time
+from exceptions import *
 
 
 class channel:
@@ -11,13 +12,13 @@ class channel:
     channel class that provides channel information.
 
     Attributes:
-        hashtag (str): Hashtag of the channel
+        name (str): Name of the channel
         title (str): Title of the channel
         url (str): URL of the channel
     """
 
-    def __init__(self, hashtag, title, href):
-        self.hashtag = hashtag
+    def __init__(self, name, title, href):
+        self.name = name[1:]
         self.title = title
         self.url = "https://eksisozluk.com" + href
 
@@ -166,8 +167,8 @@ class Sour:
             try:
                 title, count = [t.strip() for t in result.itertext()]
             except ValueError:
+                title = "".join([t.strip() for t in result.itertext()])
                 count = None
-
             sour_titles.append(sour_title(href, title, count))
 
         return sour_titles
@@ -260,8 +261,8 @@ class Sour:
             try:
                 title, count = [t.strip() for t in result.itertext()]
             except ValueError:
+                title = "".join([t.strip() for t in result.itertext()])
                 count = None
-
             sour_titles.append(sour_title(href, title, count))
 
         return sour_titles
@@ -289,7 +290,7 @@ class Sour:
             sour_titles.append(sour_title(href, title, None))
         return sour_titles
 
-    def channels(self):
+    def list_channels(self):
         """
         Return all channels
 
@@ -310,7 +311,7 @@ class Sour:
             a = result.xpath('.//a[@class="index-link"]')[0]
             channels.append(
                 channel(
-                    hashtag=a.text,
+                    name=a.text,
                     title=result.xpath('./p/text()')[0],
                     href=a.get('href')
                 )
@@ -348,9 +349,45 @@ class Sour:
             try:
                 title, count = [t.strip() for t in result.itertext()]
             except ValueError:
+                title = "".join([t.strip() for t in result.itertext()])
                 count = None
             sour_titles.append(sour_title(href, title, count))
+
         return sour_titles
 
-    def get_channel(self, hashtag):
-        pass
+    def get_channel(self, channel, page=1):
+        """
+        Return all titles under the given channel
+
+        Args:
+            channel (str): Name of the channel
+
+        Returns:
+            :obj:`list` of :class:`sour_title` objects
+        """
+
+        payload = {
+            "p": page,
+            "_": int(time.time()*1000)
+        }
+
+        r = requests.get(
+            f"https://eksisozluk.com/basliklar/kanal/{channel}", params=payload, headers=self.headers)
+
+        if r.status_code != 200:
+            raise ChannelException
+
+        doc = html.fromstring(r.content.decode())
+        sour_titles = []
+        results = doc.xpath('//li/a')
+
+        for result in results:
+            href = result.get('href')
+            try:
+                title, count = [t.strip() for t in result.itertext()]
+            except ValueError:
+                title = "".join([t.strip() for t in result.itertext()])
+                count = None
+            sour_titles.append(sour_title(href, title, count))
+
+        return sour_titles
