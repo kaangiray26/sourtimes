@@ -142,7 +142,7 @@ class Sour:
         Return latest news titles.
 
         Args:
-            page (int): The page index of the results
+            page (int, optional): Page index of the results
 
         Returns:
             :obj:`list` of :class:`sour_title` objects
@@ -179,8 +179,8 @@ class Sour:
 
         Args:
             q (str): The query text
-            page (int): The page index of the results
-            nice (boolean): Option to sort entries by their favorite counts
+            page (int, optional): Page index of the results
+            nice (boolean, optional): Option to sort entries by their favorite counts
 
         Returns:
             :obj:`list` of :class:`sour_entry` objects
@@ -225,12 +225,12 @@ class Sour:
 
         Args:
             keywords (str): Search keywords
-            author (str): Specific author for the titles
-            page (int): Page number of the results
-            fromdate (str): E.g. 1970-01-01
-            todate (str): E.g. 1970-01-01
-            nice_only (boolean): Show only top rated titles
-            sort (str): ( Topic | Date | Count )
+            author (str, optional): Specific author for the titles
+            page (int, optional): Page number of the results
+            fromdate (str, optional): E.g. 1970-01-01
+            todate (str, optional): E.g. 1970-01-01
+            nice_only (boolean, optional): Show only top rated titles
+            sort (str, optional): ( Topic | Date | Count )
 
         Returns:
             :obj:`list` of :class:`sour_title` objects
@@ -324,7 +324,7 @@ class Sour:
         Return all orphan titles
 
         Args:
-            page (int): Page index of the results
+            page (int, optional): Page index of the results
 
         Returns:
             :obj:`list` of :class:`sour_title` objects
@@ -361,6 +361,7 @@ class Sour:
 
         Args:
             channel (str): Name of the channel
+            page (str, optional): Page index of the results
 
         Returns:
             :obj:`list` of :class:`sour_title` objects
@@ -376,6 +377,45 @@ class Sour:
 
         if r.status_code != 200:
             raise ChannelException
+
+        doc = html.fromstring(r.content.decode())
+        sour_titles = []
+        results = doc.xpath('//li/a')
+
+        for result in results:
+            href = result.get('href')
+            try:
+                title, count = [t.strip() for t in result.itertext()]
+            except ValueError:
+                title = "".join([t.strip() for t in result.itertext()])
+                count = None
+            sour_titles.append(sour_title(href, title, count))
+
+        return sour_titles
+
+    def throwback(self, year, page=1):
+        """
+        Return all titles from this day on the given year
+
+        Args:
+            year (int): Year to search for
+            page (int, optional): Page index of the results
+
+        Returns:
+            :obj:`list` of :class:`sour_title` objects
+        """
+
+        payload = {
+            "p": page,
+            "_": int(time.time()*1000),
+            "year": year
+        }
+
+        r = requests.get("https://eksisozluk.com/basliklar/tarihte-bugun",
+                         params=payload, headers=self.headers)
+
+        if r.status_code != 200:
+            raise Exception
 
         doc = html.fromstring(r.content.decode())
         sour_titles = []
