@@ -121,7 +121,7 @@ class Sour:
             q (str): Query text
 
         Returns:
-            autocomplete object
+            :class:`autocomplete` object
         """
 
         payload = {
@@ -145,7 +145,7 @@ class Sour:
             page (int): The page index of the results
 
         Returns:
-            list of sour_title objects
+            :obj:`list` of :class:`sour_title` objects
         """
 
         payload = {
@@ -183,7 +183,7 @@ class Sour:
             nice (boolean): Option to sort entries by their favorite counts
 
         Returns:
-            list of sour_entry objects
+            :obj:`list` of :class:`sour_entry` objects
         """
         payload = {
             'q': q,
@@ -233,7 +233,7 @@ class Sour:
             sort (str): ( Topic | Date | Count )
 
         Returns:
-            list of sour_title objects
+            :obj:`list` of :class:`sour_title` objects
         """
 
         payload = {
@@ -272,7 +272,7 @@ class Sour:
         Return highly rated titles from yesterday.
 
         Returns:
-            list of sour_title objects
+            :obj:`list` of :class:`sour_title` objects
         """
 
         r = requests.get("https://eksisozluk.com/debe", headers=self.headers)
@@ -295,7 +295,7 @@ class Sour:
         Return all channels
 
         Returns:
-            list of channel objects
+            :obj:`list` of :class:`channel` objects
         """
         r = requests.get("https://eksisozluk.com/kanallar",
                          headers=self.headers)
@@ -327,7 +327,7 @@ class Sour:
             page (int): Page index of the results
 
         Returns:
-            list of sour_title objects
+            :obj:`list` of :class:`sour_title` objects
         """
 
         payload = {
