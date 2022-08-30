@@ -14,6 +14,9 @@ The Python Eksisozluk API Wrapper
 ## Documentation
 https://sourtimes.readthedocs.io/
 
+## PyPI
+https://pypi.org/project/sourtimes/
+
 ## Installation
 ```
 pip install sourtimes
