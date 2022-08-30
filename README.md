@@ -12,7 +12,7 @@ The Python Eksisozluk API Wrapper
 * Get entries from a page
 
 ## Documentation
-Coming soon...
+https://sourtimes.readthedocs.io/
 
 ## Installation
 ```
