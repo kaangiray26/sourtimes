@@ -6,7 +6,7 @@
 Sourtimes: The Python Eksisozluk API Wrapper
 ============================================
 
-Check out the source code at our `GitHub Repository <https://github.com/kgbzen/sourtimes>`__.
+Check out the source code at our `GitHub Repository <https://github.com/kaangiray26/sourtimes>`__.
 
 Sourtimes's documentation is organized into the following sections:
 

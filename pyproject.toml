@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sourtimes"
-version = "0.0.6"
+version = "0.0.7"
 authors = [
     {name = "Kaan Giray Buzluk", email = "kaangiray26@protonmail.com"},
 ]
@@ -23,6 +23,6 @@ dependencies = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/kgbzen/sourtimes"
+"Homepage" = "https://github.com/kaangiray26/sourtimes"
 "Documentation" = "https://sourtimes.readthedocs.io/en/latest/"
-"Bug Tracker" = "https://github.com/kgbzen/sourtimes/issues"
+"Bug Tracker" = "https://github.com/kaangiray26/sourtimes/issues"
